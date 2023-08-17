@@ -1,21 +1,25 @@
 <?php
+
+use Core\App;
 use Core\Database;
 
-$config = require base_path('config.php');
+$db=App::resolve(Database::class);
+//$config = require base_path('config.php');
+//
+//$db = new Database($config['database']);
 
-$db = new Database($config['database']);
 $currentUserId=1;
 
-    $note = $db->query('select * from notes where  id = :id' , [
-        'id'=> $_POST['id']
-    ])->findOrFail();
+$note = $db->query('select * from notes where  id = :id', [
+    'id' => $_POST['id']
+])->findOrFail();
 
-    authorize($note['user_id'] === $currentUserId);
+authorize($note['user_id'] === $currentUserId);
 
-    $db->query('delete from notes where id = :id',[
-        'id'=> $_POST['id']
-    ]);
-    header('location: /notes');
-    exit();
+$db->query('delete from notes where id = :id', [
+    'id' => $_POST['id']
+]);
+header('location: /notes');
+exit();
 
 
