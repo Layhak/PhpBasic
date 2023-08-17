@@ -4,7 +4,7 @@ use Core\App;
 use Core\Database;
 
 $db=App::resolve(Database::class);
-$currentUserId = 1;
+$currentUserId = $_SESSION['user'];
 
 
 //$id=$_GET['id'];

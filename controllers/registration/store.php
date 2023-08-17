@@ -27,15 +27,16 @@ $user = $db->query('select * from users where email=:email',[
 
 if($user){
     header('location: /');
+    exit();
 }else{
-    $db->query('insert into users(password,email) VALUES (:password,:email)',
+    $db->query('insert into users set email=:email , password=:password',
     [
         'email'=>$email,
-        'password'=>$password
+        'password'=>password_hash($password,PASSWORD_BCRYPT)
     ]);
     $_SESSION['user']=[
         'email'=>$email
     ];
-    header('location /');
+    header('location: /');
     exit();
 }
