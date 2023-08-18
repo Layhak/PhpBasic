@@ -26,7 +26,7 @@ $user = $db->query('select * from users where email=:email',[
 ])->find();
 
 if($user){
-    header('location: /');
+    header('location: /sessions');
     exit();
 }else{
     $db->query('insert into users set email=:email , password=:password',
@@ -34,9 +34,9 @@ if($user){
         'email'=>$email,
         'password'=>password_hash($password,PASSWORD_BCRYPT)
     ]);
-    $_SESSION['user']=[
+    login([
         'email'=>$email
-    ];
+    ]);
     header('location: /');
     exit();
 }
