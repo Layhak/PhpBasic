@@ -2,21 +2,18 @@
 
 use Core\App;
 use Core\Database;
-use Core\Validator;
+use Http\Forms\RegisterForm;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
-$errors=[];
 
-if (!Validator::email($email)){
-    $errors['email']="Please Input the valid email";
-}
-if (!Validator::string($password,7,255)){
-    $errors['password']="Password length must be between 8 to 50";
-}
-if (!empty($errors)){
+
+$form = new RegisterForm();
+
+
+if (!$form->validate($email,$password)){
     return view('registration/create.view.php',[
-        'errors'=>$errors
+        'errors'=>$form->errors()
     ]);
 }
 $db=App::resolve(Database::class);

@@ -70,7 +70,9 @@ class Router
         }
         $this->abort();
     }
-
+    public  function previousUrl(){
+        return $_SERVER['HTTP_REFERER'];
+    }
     protected
     function abort($code = Response::NOT_FOUND)
     {
