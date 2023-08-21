@@ -1,0 +1,16 @@
+{
+  "name": "heng.layhak/php-basic",
+  "authors": [
+    {
+      "name": "LAYHAK",
+      "email": "layhak.garu@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Core\\": "Core/",
+      "Http\\": "Http/"
+    }
+  }
+}
